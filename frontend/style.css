@@ -22,6 +22,59 @@
     --focus-ring: rgba(37, 99, 235, 0.2);
     --welcome-bg: #1e3a5f;
     --welcome-border: #2563eb;
+    --code-bg: rgba(0, 0, 0, 0.2);
+    --link-color: #7dd3fc;
+    --link-bg: rgba(14, 165, 233, 0.08);
+    --link-border: rgba(14, 165, 233, 0.5);
+    --link-hover-color: #bae6fd;
+    --link-hover-bg: rgba(14, 165, 233, 0.15);
+    --link-hover-border: #38bdf8;
+}
+
+[data-theme="light"] {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --background: #f1f5f9;
+    --surface: #ffffff;
+    --surface-hover: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #cbd5e1;
+    --user-message: #2563eb;
+    --assistant-message: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+    --focus-ring: rgba(37, 99, 235, 0.2);
+    --welcome-bg: #eff6ff;
+    --welcome-border: #2563eb;
+    --code-bg: rgba(0, 0, 0, 0.06);
+    --link-color: #1d4ed8;
+    --link-bg: rgba(37, 99, 235, 0.08);
+    --link-border: rgba(37, 99, 235, 0.4);
+    --link-hover-color: #1e40af;
+    --link-hover-bg: rgba(37, 99, 235, 0.12);
+    --link-hover-border: #2563eb;
+}
+
+/* Theme transitions */
+body,
+.sidebar,
+.chat-main,
+.chat-container,
+.chat-messages,
+.chat-input-container,
+#chatInput,
+.stat-item,
+.suggested-item,
+.message.assistant .message-content,
+.message.welcome-message .message-content,
+.theme-toggle,
+.new-chat-btn,
+.stats-header,
+.suggested-header,
+.course-title-item,
+.sources-content a {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Base Styles */
@@ -284,9 +337,9 @@ header h1 {
     padding: 0.4rem 0.75rem;
     font-size: 0.82rem;
     font-weight: 500;
-    color: #7dd3fc;
-    background: rgba(14, 165, 233, 0.08);
-    border-left: 2px solid rgba(14, 165, 233, 0.5);
+    color: var(--link-color);
+    background: var(--link-bg);
+    border-left: 2px solid var(--link-border);
     border-radius: 0 0.375rem 0.375rem 0;
     text-decoration: none;
     white-space: nowrap;
@@ -303,9 +356,9 @@ header h1 {
 }
 
 .sources-content a:hover {
-    color: #bae6fd;
-    background: rgba(14, 165, 233, 0.15);
-    border-left-color: #38bdf8;
+    color: var(--link-hover-color);
+    background: var(--link-hover-bg);
+    border-left-color: var(--link-hover-border);
 }
 
 /* Markdown formatting styles */
@@ -340,7 +393,7 @@ header h1 {
 }
 
 .message-content code {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--code-bg);
     padding: 0.125rem 0.25rem;
     border-radius: 3px;
     font-family: 'Fira Code', 'Consolas', monospace;
@@ -348,7 +401,7 @@ header h1 {
 }
 
 .message-content pre {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--code-bg);
     padding: 0.75rem;
     border-radius: 4px;
     overflow-x: auto;
@@ -778,4 +831,56 @@ details[open] .suggested-header::before {
     .sidebar {
         width: 280px;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.theme-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Show sun in dark mode (click to go light), moon in light mode (click to go dark) */
+.theme-toggle .moon-icon {
+    display: none;
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+    display: none;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+    display: block;
+}
+
+/* Icon rotation animation on toggle */
+.theme-toggle svg {
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.theme-toggle:active svg {
+    transform: rotate(30deg);
 }
