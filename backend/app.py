@@ -73,6 +73,12 @@ async def query_documents(request: QueryRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.delete("/api/session/{session_id}")
+async def delete_session(session_id: str):
+    """Clear and remove a conversation session"""
+    rag_system.session_manager.clear_session(session_id)
+    return {"status": "ok"}
+
 @app.get("/api/courses", response_model=CourseStats)
 async def get_course_stats():
     """Get course analytics and statistics"""
@@ -116,4 +122,4 @@ class DevStaticFiles(StaticFiles):
     
     
 # Serve static files for the frontend
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="static")
+app.mount("/", DevStaticFiles(directory="../frontend", html=True), name="static")
