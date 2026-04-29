@@ -18,4 +18,10 @@ dependencies = [
 dev-dependencies = [
     "pytest>=8.0.0",
     "pytest-mock>=3.14.0",
+    "httpx>=0.27.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+addopts = "-v"
